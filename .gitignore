@@ -2,7 +2,9 @@
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-
+.idea
+out
+java-basic.iml
 ### Kotlin ###
 .kotlin
 
