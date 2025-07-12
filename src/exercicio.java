@@ -4,37 +4,42 @@ public class exercicio {
     public static void main(String[] args) {
         Scanner leitor = new Scanner(System.in);
 
-        int anoVeiculo;
-        float valorDesconto;
-        float valorVeiculo;
-        float valorComDesconto;
-        int totalSemiNovos = 0;
-        int totalDeCarros = 0;
-        char desejaContinuar = 's';
+        double valorPago;
+        double totalDesconto = 0;
+        double desconto = 0;
+        double valorVeiculo;
+        String combustivel;
 
-        while(desejaContinuar == 'S' || desejaContinuar == 's'){
-            System.out.println("Digite o ano do veiculo: ");
-            anoVeiculo = leitor.nextInt();
+        while (true){
+            System.out.print("Digite o valor do veiculo (0 para sair): ");
+            valorVeiculo = leitor.nextDouble();
+            leitor.nextLine();
 
-            System.out.println("Digite o valor do veiculo: ");
-            valorVeiculo = leitor.nextFloat();
-
-            if(anoVeiculo <= 2000){
-                valorDesconto = valorVeiculo * 0.12f;
-                valorComDesconto = valorVeiculo - valorDesconto;
-                totalSemiNovos++;
-            }else{
-                valorDesconto = valorVeiculo * 0.07f;
-                valorComDesconto = valorVeiculo - valorDesconto;
+            if(valorVeiculo == 0){
+                break;
             }
-            System.out.println("O valor do desconto foi de: " + valorDesconto);
-            System.out.println("Valor com desconto: " + valorComDesconto);
-            totalDeCarros++;
 
-            System.out.println("Deseja continuar? S - Sim / N - Não: ");
-            desejaContinuar = leitor.next().charAt(0);
+            System.out.print("Digite o tipo de combustivel do veiculo: ");
+            combustivel = leitor.nextLine().toLowerCase();
+
+            if(combustivel.equals("alcool")){
+                desconto = valorVeiculo * 0.25;
+            } else if (combustivel.equals("gasolina")) {
+                desconto = valorVeiculo * 0.21;
+            } else if (combustivel.equals("diesel")){
+                desconto = valorVeiculo * 0.14;
+            } else {
+                System.out.println("Tipo de combustível inválido. Tente novamente.");
+                return; // Encerra o programa
+            }
+
+            valorPago = valorVeiculo - desconto;
+            totalDesconto += desconto;
+
+
+            System.out.println("Valor do desconto = R$" + totalDesconto);
+            System.out.println("Valor total = R$" + valorPago );
+
         }
-        System.out.println("Total de carros semi novos = " + totalSemiNovos);
-        System.out.println("Total de carros = " + totalDeCarros);
     }
 }
