@@ -4,42 +4,43 @@ public class exercicio {
     public static void main(String[] args) {
         Scanner leitor = new Scanner(System.in);
 
-        double valorPago;
-        double totalDesconto = 0;
-        double desconto = 0;
-        double valorVeiculo;
-        String combustivel;
+        double salarioMinimo = 1518.00;
+        double salarioAtual = 0;
+        double calculoPorcentagem = 0;
+        double novoSalario;
+        double totalReajuste = 0;
+        String nome;
 
-        while (true){
-            System.out.print("Digite o valor do veiculo (0 para sair): ");
-            valorVeiculo = leitor.nextDouble();
+        for (int i = 0; i <= 4; i++) {
+
+            System.out.print("Digite o nome do funcionário: ");
+            nome = leitor.nextLine();
+
+            System.out.print("Digite seu salário atual em reais: ");
+            salarioAtual = leitor.nextDouble();
             leitor.nextLine();
 
-            if(valorVeiculo == 0){
-                break;
-            }
-
-            System.out.print("Digite o tipo de combustivel do veiculo: ");
-            combustivel = leitor.nextLine().toLowerCase();
-
-            if(combustivel.equals("alcool")){
-                desconto = valorVeiculo * 0.25;
-            } else if (combustivel.equals("gasolina")) {
-                desconto = valorVeiculo * 0.21;
-            } else if (combustivel.equals("diesel")){
-                desconto = valorVeiculo * 0.14;
+            if (salarioAtual < 3 * salarioMinimo) {
+                System.out.println("Faixa: Menos de 3 salários mínimos (reajuste de 50%)");
+                calculoPorcentagem = salarioAtual * 0.50;
+            } else if (salarioAtual >= 3 * salarioMinimo && salarioAtual <= 10 * salarioMinimo) {
+                System.out.println("Faixa: Entre 3 até 10 salários mínimos (reajuste de 20%)");
+                calculoPorcentagem = salarioAtual * 0.20;
+            } else if (salarioAtual >= 10 * salarioMinimo && salarioAtual <= 20 * salarioMinimo) {
+                System.out.println("Faixa: Entre 10 até 20 salários mínimos (reajuste de 15%)");
+                calculoPorcentagem = salarioAtual * 0.15;
             } else {
-                System.out.println("Tipo de combustível inválido. Tente novamente.");
-                return; // Encerra o programa
+                System.out.println("10% Para os demais funcionários");
+                calculoPorcentagem = salarioAtual * 0.10;
             }
+            System.out.println("============================================");
+            novoSalario = salarioAtual + calculoPorcentagem;
+            totalReajuste += calculoPorcentagem;
 
-            valorPago = valorVeiculo - desconto;
-            totalDesconto += desconto;
-
-
-            System.out.println("Valor do desconto = R$" + totalDesconto);
-            System.out.println("Valor total = R$" + valorPago );
-
+            System.out.println("Nome do funcionário: " + nome);
+            System.out.println("Total de aumento na folha de pagamento: " + totalReajuste);
+            System.out.println("Novo salário: " + novoSalario);
+            System.out.println("============================================");
         }
     }
 }
