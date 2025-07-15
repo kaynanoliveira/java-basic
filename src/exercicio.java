@@ -1,39 +1,33 @@
 import java.util.Scanner;
-import java.text.NumberFormat;
-import java.util.Locale;
 
 public class exercicio {
     public static void main(String[] args) {
         Scanner leitor = new Scanner(System.in);
-        NumberFormat formatador = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 
-        int nivel;
-        int horasTrabalhadas;
-        double salarioTotal;
-        double valorHora;
+        double valorkWh;
+        double valorTotal;
+        int quantidadekWh;
+        char tipoCliente;
 
-        System.out.print("Digite quantas horas ele trabalha: ");
-        horasTrabalhadas = leitor.nextInt();
+        System.out.print("Digite o tipo de cliente: ");
+        tipoCliente = leitor.next().charAt(0);
 
-        System.out.print("Digite o nivel do professor (1, 2 ou 3): ");
-        nivel = leitor.nextInt();
+        System.out.print("Informe a quantidade de kWh: ");
+        quantidadekWh = leitor.nextInt();
 
-        switch (nivel){
-            case 1:
-                valorHora = 12.0;
-                break;
-            case 2:
-                valorHora = 17.0;
-                break;
-            case 3:
-                valorHora = 25.0;
-                break;
-            default:
-                System.out.println("Nível inválido!!");
-                return;
+        if(tipoCliente == 'a' || tipoCliente == 'A'){
+            valorkWh = 0.60;
+        } else if (tipoCliente == 'b' || tipoCliente == 'B') {
+            valorkWh = 0.48;
+        } else if (tipoCliente == 'c' || tipoCliente == 'C') {
+            valorkWh = 1.29;
+        } else {
+            System.out.println("Tipo inválido!");
+            return;
         }
-        salarioTotal = valorHora * horasTrabalhadas;
 
-        System.out.println("Salário final: " + formatador.format(salarioTotal));
+        valorTotal = valorkWh * quantidadekWh;
+
+        System.out.printf("Valor total: R$ %.2f\n", valorTotal);
     }
 }
